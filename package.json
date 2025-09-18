@@ -28,14 +28,22 @@
 	"devDependencies": {
 		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
 		"@types/bun": "latest",
+		"esbuild": "^0.25.10",
+		"np": "^10.2.0",
+		"glob": "^11.0.3",
 		"prettier": "^3.6.2"
 	},
 	"peerDependencies": {
 		"typescript": "^5"
 	},
-	"dependencies": {
-		"esbuild": "^0.25.10",
-		"glob": "^11.0.3",
-		"reflect-metadata": "^0.2.2"
-	}
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/maca134/percy.git"
+	},
+	"author": "maca134@googlemail.com",
+	"bugs": {
+		"url": "https://github.com/maca134/percy/issues"
+	},
+	"homepage": "https://github.com/maca134/percy#readme",
+	"license": "MIT"
 }
