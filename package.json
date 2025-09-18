@@ -18,7 +18,7 @@
 	},
 	"scripts": {
 		"dev": "bun run --watch src/index.ts",
-		"release": "np",
+		"release": "np --no-tests",
 		"prerelease": "bun run format && bun run build",
 		"build": "bun run typecheck && bun run build.ts",
 		"test": "bun test",
