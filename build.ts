@@ -74,6 +74,10 @@ await $`rm -rf ./dist`;
 
 await $`tsc --emitDeclarationOnly --declaration --project tsconfig.build.json`;
 
-Promise.all([esmBuild(), cjsBuild()]);
+await Promise.all([esmBuild(), cjsBuild()]);
+
+await $`cp package.cjs.json ./dist/cjs/package.json`;
+
+await $`cp package.cjs.json ./dist/types/package.json`;
 
 console.log("Build completed!");
