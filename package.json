@@ -1,0 +1,41 @@
+{
+	"name": "@maca134/percy",
+	"description": "A description of your package",
+	"version": "1.0.0",
+	"main": "dist/cjs/index.js",
+	"type": "module",
+	"module": "dist/index.js",
+	"types": "dist/types/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/cjs/index.js"
+		}
+	},
+	"scripts": {
+		"dev": "bun run --watch src/index.ts",
+		"release": "np",
+		"prerelease": "bun run format && bun run build",
+		"build": "bun run typecheck && bun run build.ts",
+		"test": "bun test",
+		"typecheck": "bun tsc --noEmit",
+		"format": "prettier --write \"**/*.{ts,tsx,md,cjs}\""
+	},
+	"devDependencies": {
+		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
+		"@types/bun": "latest",
+		"prettier": "^3.6.2"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"esbuild": "^0.25.10",
+		"glob": "^11.0.3",
+		"reflect-metadata": "^0.2.2"
+	}
+}
