@@ -2,7 +2,8 @@ import { eof } from "./combinators/eof";
 import { seq } from "./combinators/seq";
 
 export type Success<T> = [number, T];
-export type Failure = [0, string, number];
+export type Expected = string | (string | Expected)[];
+export type Failure = [0, Expected, number];
 export const isFailure = <T>(result: ParserResult<T>): result is Failure =>
 	result[0] === 0;
 

@@ -1,4 +1,10 @@
-import { isFailure, p, Percy, type ParserResult } from "../Percy";
+import {
+	isFailure,
+	p,
+	Percy,
+	type Expected,
+	type ParserResult,
+} from "../Percy";
 import { failure } from "./failure";
 import { success } from "./success";
 
@@ -85,7 +91,7 @@ export function alt<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 export function alt<T>(...parsers: Percy[]): Percy<T>;
 export function alt<T>(...parsers: Percy[]): Percy<T> {
 	return p((input, index) => {
-		const expected: string[] = [];
+		const expected: Expected[] = [];
 		for (const parser of parsers) {
 			const result = parser.parse(input, index) as ParserResult<unknown>;
 			if (!isFailure(result)) {
@@ -93,6 +99,6 @@ export function alt<T>(...parsers: Percy[]): Percy<T> {
 			}
 			expected.push(result[1]);
 		}
-		return failure(index, `[${expected.join(", ")}]`);
+		return failure(index, expected);
 	});
 }
