@@ -3,9 +3,9 @@ import { seq } from "./combinators/seq";
 
 export type Success<T> = [number, T];
 export type Expected = string | (string | Expected)[];
-export type Failure = [0, Expected, number];
+export type Failure = [-1, Expected, number];
 export const isFailure = <T>(result: ParserResult<T>): result is Failure =>
-	result[0] === 0;
+	result[0] === -1;
 
 export type ParserInput = string | Buffer;
 export type ParserResult<T> = Success<T> | Failure;
