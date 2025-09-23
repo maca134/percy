@@ -1,3 +1,4 @@
+import { failure } from "./combinators";
 import { eof } from "./combinators/eof";
 import { seq } from "./combinators/seq";
 
@@ -21,7 +22,7 @@ export class Percy<Out = unknown, In extends ParserInput = ParserInput> {
 	constructor(
 		readonly parse: ParserFnc<Out>,
 		readonly name: string,
-	) {}
+	) { }
 
 	tryParse(input: In) {
 		const result = seq(this, eof())
@@ -40,7 +41,7 @@ export class Percy<Out = unknown, In extends ParserInput = ParserInput> {
 		return p((input, index): ParserResult<U> => {
 			const result = this.parse(input, index);
 			if (isFailure(result)) {
-				return result;
+				return failure(result[2], result[1]);
 			}
 			return [result[0], fn(result[1])];
 		}, `Percy.map()`);
