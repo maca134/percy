@@ -25,7 +25,7 @@ export function seq<T extends Array<unknown>>(...parsers: Percy[]): Percy<T> {
 				currentIndex,
 			) as ParserResult<unknown>;
 			if (isFailure(result)) {
-				return failure(currentIndex, result[1]);
+				return failure(result[2], result[1]);
 			}
 			results.push(result[1]);
 			currentIndex = result[0];
