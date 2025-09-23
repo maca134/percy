@@ -16,5 +16,5 @@ export function many<T>(parser: Percy<T>): Percy<T[]> {
 			currentIndex = result[0];
 		}
 		return [currentIndex, results];
-	});
+	}, `many(${parser.name})`);
 }

@@ -14,10 +14,14 @@ export type ParserFnc<T> = (
 	index: number,
 ) => ParserResult<T>;
 
-export const p = <T>(fn: ParserFnc<T>): Percy<T> => new Percy(fn);
+export const p = <T>(fn: ParserFnc<T>, name: string): Percy<T> =>
+	new Percy(fn, name);
 
 export class Percy<Out = unknown, In extends ParserInput = ParserInput> {
-	constructor(readonly parse: ParserFnc<Out>) {}
+	constructor(
+		readonly parse: ParserFnc<Out>,
+		readonly name: string,
+	) {}
 
 	tryParse(input: In) {
 		const result = seq(this, eof())
@@ -39,6 +43,6 @@ export class Percy<Out = unknown, In extends ParserInput = ParserInput> {
 				return result;
 			}
 			return [result[0], fn(result[1])];
-		});
+		}, `Percy.map()`);
 	}
 }

@@ -90,15 +90,21 @@ export function alt<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 
 export function alt<T>(...parsers: Percy[]): Percy<T>;
 export function alt<T>(...parsers: Percy[]): Percy<T> {
-	return p((input, index) => {
-		const expected: Expected[] = [];
-		for (const parser of parsers) {
-			const result = parser.parse(input, index) as ParserResult<unknown>;
-			if (!isFailure(result)) {
-				return success(result[0], result[1] as T);
+	return p(
+		(input, index) => {
+			const expected: Expected[] = [];
+			for (const parser of parsers) {
+				const result = parser.parse(
+					input,
+					index,
+				) as ParserResult<unknown>;
+				if (!isFailure(result)) {
+					return success(result[0], result[1] as T);
+				}
+				expected.push(result[1]);
 			}
-			expected.push(result[1]);
-		}
-		return failure(index, expected);
-	});
+			return failure(index, expected);
+		},
+		`alt(${parsers.map((p) => p.name).join(", ")})`,
+	);
 }

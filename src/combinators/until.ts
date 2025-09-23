@@ -12,5 +12,5 @@ export function until(predicate: (value: number) => boolean): Percy<Buffer> {
 			end++;
 		}
 		return success(end + 1, input.subarray(index, end));
-	});
+	}, `until(${predicate.name})`);
 }

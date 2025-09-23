@@ -10,5 +10,5 @@ export function str(value: string): Percy<string> {
 		return input.startsWith(value, index)
 			? success(index + value.length, value)
 			: failure(index, `"${value}"`);
-	});
+	}, `str("${value}")`);
 }

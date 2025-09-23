@@ -84,20 +84,23 @@ export function seq<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 
 export function seq<T extends Array<unknown>>(...parsers: Percy[]): Percy<T>;
 export function seq<T extends Array<unknown>>(...parsers: Percy[]): Percy<T> {
-	return p((input, index) => {
-		const results: unknown[] = [];
-		let currentIndex = index;
-		for (const parser of parsers) {
-			const result = parser.parse(
-				input,
-				currentIndex,
-			) as ParserResult<unknown>;
-			if (isFailure(result)) {
-				return failure(result[2], result[1]);
+	return p(
+		(input, index) => {
+			const results: unknown[] = [];
+			let currentIndex = index;
+			for (const parser of parsers) {
+				const result = parser.parse(
+					input,
+					currentIndex,
+				) as ParserResult<unknown>;
+				if (isFailure(result)) {
+					return failure(result[2], result[1]);
+				}
+				results.push(result[1]);
+				currentIndex = result[0];
 			}
-			results.push(result[1]);
-			currentIndex = result[0];
-		}
-		return success(currentIndex, results as T);
-	});
+			return success(currentIndex, results as T);
+		},
+		`seq(${parsers.map((p) => p.name).join(", ")})`,
+	);
 }

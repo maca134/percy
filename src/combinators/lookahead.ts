@@ -8,5 +8,5 @@ export function lookahead<T>(parser: Percy<T>): Percy<T> {
 			return result;
 		}
 		return success(index, result[1]);
-	});
+	}, `lookahead(${parser.name})`);
 }

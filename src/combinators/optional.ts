@@ -8,5 +8,5 @@ export function optional<T>(parser: Percy<T>): Percy<T | null> {
 			return success(result[0], result[1] as T);
 		}
 		return success(index, null);
-	});
+	}, `optional(${parser.name})`);
 }

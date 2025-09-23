@@ -10,5 +10,5 @@ export function chain<T, U>(
 			return result;
 		}
 		return fn(result[1]).parse(input, result[0]);
-	});
+	}, `chain(${parser.name})`);
 }

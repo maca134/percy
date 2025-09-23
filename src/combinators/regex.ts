@@ -17,5 +17,5 @@ export function regex(re: RegExp): Percy<string> {
 		} else {
 			return failure(index, expected);
 		}
-	});
+	}, `regex(${re.toString()})`);
 }
