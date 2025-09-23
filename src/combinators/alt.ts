@@ -96,4 +96,3 @@ export function alt<T>(...parsers: Percy[]): Percy<T> {
 		return failure(index, `[${expected.join(", ")}]`);
 	});
 }
-
