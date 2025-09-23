@@ -22,7 +22,7 @@ export class Percy<Out = unknown, In extends ParserInput = ParserInput> {
 	constructor(
 		readonly parse: ParserFnc<Out>,
 		readonly name: string,
-	) { }
+	) {}
 
 	tryParse(input: In) {
 		const result = seq(this, eof())
