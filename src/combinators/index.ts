@@ -1,5 +1,6 @@
 export * from "./alt";
 export * from "./binary";
+export * from "./chain";
 export * from "./eof";
 export * from "./failure";
 export * from "./lazy";
